@@ -101,8 +101,9 @@ Route::middleware('check.login')->group(function () {
 });
 
 
-Route::prefix('student/{student_code}')->group(function () {
-    Route::get('/index', [StudentLoginController::class, 'index'])->name('student.login-home');
+Route::middleware('student.login')->prefix('student/{student_code}')->group(function () {
+    Route::get('/', [StudentLoginController::class, 'index'])->name('student.login-home');
+    Route::get('/transcript/{id_grade}', [StudentLoginController::class, 'transcript'])->name('student.login-transcript');
 });
 
 

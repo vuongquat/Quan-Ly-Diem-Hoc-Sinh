@@ -37,7 +37,7 @@
                 <!-- /.col -->
                 <div class="col-sm-4">
                     <a
-                        href="{{route('student.transcript-create',['id'=>$student->id,'grade'=>$gradeChoose])}}"
+                        href="{{route('student.transcript-create',['id'=>$student->id,'grade'=>$studentGrade->id])}}"
                         class="btn btn-primary float-sm-right"
                         >Tạo điểm</a
                     >
@@ -108,8 +108,8 @@
                                 <td>{{$gpaSubject->gpa_national_defense_education}}</td>
                                 <td>{{$gpaSubject->gpa_physical_education}}</td>
                                 <td>
-                                    <a href="{{route('student.transcript-edit',['id'=>$student->id,'grade'=>$gradeChoose,'idTS'=>$gpaSubject->id])}}" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="" data-url="{{route('student.transcript-delete',['id'=>$student->id,'grade'=>$gradeChoose,'idTS'=>$gpaSubject->id])}}" class="text-danger action-delete"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="{{route('student.transcript-edit',['id'=>$student->id,'grade'=>$studentGrade->id,'idTS'=>$gpaSubject->id])}}" class="text-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="" data-url="{{route('student.transcript-delete',['id'=>$student->id,'grade'=>$studentGrade->id,'idTS'=>$gpaSubject->id])}}" class="text-danger action-delete"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach

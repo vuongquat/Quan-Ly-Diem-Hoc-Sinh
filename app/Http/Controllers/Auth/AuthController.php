@@ -25,11 +25,20 @@ class AuthController extends Controller
     public function login (){
         $idUserTeacher = Session::get('idUserTeacher');
         $idClassTeacher = Session::get('idClassTeacher');
-        if(isset($idClassTeacher) && isset($idUserTeacher)){
-            return view('home');
+        $studentCode = Session::get('studentCode');
+        $idAdmin = Auth::id();
+        if(isset($idAdmin)){
+            return redirect()->route('home');
+        }
+        else if(isset($idClassTeacher) && isset($idUserTeacher)){
+            return redirect()->route('home');
+        }
+        else if(isset($studentCode)){
+            return redirect()->route('student.login-home',['student_code'=>$studentCode]);
         }
         return view('login.login');
     }
+
     public function postLogin(AuthLoginRequest $request){
         $teacherUser = $this->teacher->where('email',$request->user)->first();
         $studentUser = $this->student->where('student_code',$request->user)->first();
@@ -47,8 +56,11 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
         else if(isset($studentUser) && Hash::check($request->password, $studentUser->password)){
-            
-            return redirect()->route('home');
+            $studentCode = $studentUser->student_code;
+            $idStudentGrade = $studentUser->class->id_grade;
+            Session::put('idStudentGrade',$idStudentGrade);
+            Session::put('studentCode',$studentCode);
+            return redirect()->route('student.login-home',['student_code' => $studentCode]);
         }
         else{
             return redirect()->route('login');
@@ -57,11 +69,16 @@ class AuthController extends Controller
 
     public function logout(){
         $idUserTeacher = Session::get('idUserTeacher');
+        $studentCode = Session::get('studentCode');
         if(Auth::check()){
             Auth::logout();
             return redirect()->route('login');
         }
         else if(isset($idUserTeacher)){
+            Session::flush();
+            return redirect()->route('login');
+        }
+        else if(isset($studentCode)){
             Session::flush();
             return redirect()->route('login');
         }

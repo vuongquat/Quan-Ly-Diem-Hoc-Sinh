@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class StudentLogin
 {
@@ -16,6 +17,13 @@ class StudentLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        $studentCode = Session::get('studentCode');
+        if(isset($studentCode)){
+            return $next($request);
+        }
+        else{
+            return redirect()->route('login');
+        }
+        
     }
 }

@@ -75,11 +75,10 @@ class TranscriptController extends Controller
         if(Gate::allows('is-admin')){
             $student = $this->student->find($id);
             $grades = $this->grade->whereNotIn('grade',['Đã tốt nghiệp'])->get();
-            $gradeChoose = $grade;
-            $studentGrade = $this->grade->find($gradeChoose);
+            $studentGrade = $this->grade->find($grade);
             $gpaSubjects = $this->gpaSubject->where('id_student',$id)->where('id_grade',$grade)->get();
             $gpaSchoolYear = $this->gpaSchoolYear->where('id_student',$id)->where('id_grade',$grade)->get();
-            return view('transcript.index',compact('grades','student','gradeChoose','studentGrade','gpaSubjects','gpaSchoolYear'));
+            return view('transcript.index',compact('grades','student','studentGrade','gpaSubjects','gpaSchoolYear'));
         }else{
             return view('home');
         }

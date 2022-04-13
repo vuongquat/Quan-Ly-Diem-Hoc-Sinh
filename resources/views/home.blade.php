@@ -89,5 +89,5 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-  </div>
+</div>
 @endsection
