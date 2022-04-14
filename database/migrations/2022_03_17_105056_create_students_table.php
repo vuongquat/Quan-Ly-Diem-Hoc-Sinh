@@ -17,7 +17,6 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->string('student_code')->unique();
             $table->integer('id_class');
-            $table->integer('id_role');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('gender');

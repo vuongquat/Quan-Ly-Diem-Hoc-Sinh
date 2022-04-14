@@ -114,7 +114,6 @@ class StudentController extends Controller
                 $this->student->create([
                     'student_code'=> $studentCode,
                     'id_class'=>$idClassTeacher,
-                    'id_role'=>3,
                     'first_name'=>$request->first_name,
                     'last_name'=>$request->last_name,
                     'gender'=>$request->gender,
@@ -129,7 +128,6 @@ class StudentController extends Controller
                 $this->student->create([
                     'student_code'=> $studentCode,
                     'id_class'=>$request->id_class,
-                    'id_role'=>3,
                     'first_name'=>$request->first_name,
                     'last_name'=>$request->last_name,
                     'gender'=>$request->gender,
@@ -190,7 +188,6 @@ class StudentController extends Controller
                     $this->student->find($id)->update([
                     'student_code'=> $studentCode,
                     'id_class'=>$idClassTeacher,
-                    'id_role'=>3,
                     'first_name'=>$request->first_name,
                     'last_name'=>$request->last_name,
                     'gender'=>$request->gender,
@@ -201,7 +198,6 @@ class StudentController extends Controller
                 }else{
                     $this->student->find($id)->update([
                     'id_class'=>$idClassTeacher,
-                    'id_role'=>3,
                     'last_name'=>$request->last_name,
                     'gender'=>$request->gender,
                     'date_of_birth'=>$request->date_of_birth,
@@ -219,7 +215,6 @@ class StudentController extends Controller
                     $this->student->find($id)->update([
                     'student_code'=> $studentCode,
                     'id_class'=>$request->id_class,
-                    'id_role'=>3,
                     'first_name'=>$request->first_name,
                     'last_name'=>$request->last_name,
                     'gender'=>$request->gender,
@@ -230,7 +225,6 @@ class StudentController extends Controller
                 }else{
                     $this->student->find($id)->update([
                     'id_class'=>$request->id_class,
-                    'id_role'=>3,
                     'last_name'=>$request->last_name,
                     'gender'=>$request->gender,
                     'date_of_birth'=>$request->date_of_birth,

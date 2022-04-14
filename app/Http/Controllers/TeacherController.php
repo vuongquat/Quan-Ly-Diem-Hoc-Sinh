@@ -44,7 +44,6 @@ class TeacherController extends Controller
             $password = Hash::make($newDate);
             $this->teacher->create([
                 'id_class'=> $request->id_class,
-                'id_role' => 2,
                 'first_name'=>$request->first_name,
                 'last_name'=>$request->last_name,
                 'gender' => $request->gender,
@@ -75,7 +74,6 @@ class TeacherController extends Controller
             $password = Hash::make($newDate);
             $this->teacher->find($id)->update([
                 'id_class'=> $request->id_class,
-                'id_role' => 2,
                 'first_name'=>$request->first_name,
                 'last_name'=>$request->last_name,
                 'gender' => $request->gender,

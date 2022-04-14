@@ -3,8 +3,13 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('home')}}" class="nav-link"></i>Home</a>
+        <a href="{{route('home')}}" class="nav-link"><i class="fa-solid fa-house-user mr-1"></i>Trang chủ</a>
       </li>
+      @can('admin-1')
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('users.index')}}" class="nav-link"><i class="fa-solid fa-users mr-1"></i>Quản trị viên</a>
+      </li>
+      @endcan
       @can('is-admin')
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('classes.index',['id'=>'all'])}}" class="nav-link"><i class="fa-solid fa-school mr-1"></i>Lớp học</a>

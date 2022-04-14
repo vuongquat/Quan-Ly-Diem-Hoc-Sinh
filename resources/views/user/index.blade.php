@@ -1,11 +1,11 @@
 @extends('layouts.master')
 @section('title')
-<title>Danh sách giáo viên</title>
+<title>Danh sách quản trị viên</title>
 @endsection 
 
 @section('js')
 <script src="jquery/sweetalert2.js"></script>
-<script src="teachers/index/index.js"></script>
+<script src="user/index.js"></script>
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -14,14 +14,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-4">
-                    <h1 class="m-0">Danh sách giáo viên</h1>
+                    <h1 class="m-0">Danh sách quản trị viên</h1>
                 </div>
                 <div class="col-sm-4">
-                    <form class="form-inline" method="POST" action="{{route('teacher.search')}}">
+                    <form class="form-inline" method="POST" action="">
                         @csrf
                         <div class="form-group mb-2">
                             <label for="" class="mr-1">Tìm kiếm: </label>
-                            <input type="text" class="form-control" name="teacher" placeholder="Tìm kiếm theo tên giáo viên">
+                            <input type="text" class="form-control" name="user" placeholder="Tìm kiếm theo tên QTV">
                         </div>
                         <button type="submit" class="btn btn-primary mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
@@ -29,9 +29,9 @@
                 <!-- /.col -->
                 <div class="col-sm-4">
                     <a
-                        href="{{route('teacher.create')}}"
+                        href="{{route('users.create')}}"
                         class="btn btn-primary float-sm-right"
-                        >Thêm giáo viên</a
+                        >Thêm QTV</a
                     >
                 </div>
                 <!-- /.col -->
@@ -64,7 +64,6 @@
                             <th scope="col">#</th>
                             <th scope="col">Họ tên</th>
                             <th scope="col">Giới tính</th>
-                            <th scope="col">Lớp</th>
                             <th scope="col">SĐT</th>
                             <th scope="col">Ngày sinh</th>
                             <th scope="col">Địa chỉ</th>
@@ -73,41 +72,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(isset($teachers))
-                            @if(count($teachers) > 0)
-                                @foreach($teachers as $teacher)
+                        @foreach($users as $user)
                                     <tr>
                                         <th scope="row">{{$loop->index + 1}}</th>
-                                        <td>{{$teacher->last_name .' '.$teacher->first_name}}</td>
-                                        <td>{{$teacher->gender}}</td>
-                                        <td>{{$teacher->class->class_grade}}</td>
-                                        <td>{{$teacher->phone_number}}</td>
-                                        <td>{{Carbon\Carbon::parse($teacher->date_of_birth)->format('d/m/Y')}}</td>
-                                        <td>{{$teacher->address}}</td>
-                                        <td>{{$teacher->email}}</td>
+                                        <td>{{$user->last_name .' '.$user->first_name}}</td>
+                                        <td>{{$user->gender}}</td>
+                                        <td>{{$user->phone_number}}</td>
+                                        <td>{{Carbon\Carbon::parse($user->date_of_birth)->format('d/m/Y')}}</td>
+                                        <td>{{$user->address}}</td>
+                                        <td>{{$user->email}}</td>
                                         <td>
-                                            <a href="{{route('teacher.edit',['id'=>$teacher->id])}}" class="text-warning mr-5"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a href="" data-url="{{$teacher->id}}" class="text-danger action-delete"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="{{route('users.edit',['id'=>$user->id])}}" class="text-warning mr-5"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="" data-url="{{route('users.delete',['id'=>$user->id])}}" class="text-danger action-delete"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
-                            @else
-                                <tr>
-                                    <th></th>
-                                    <td>Không tìm thấy kết quả</td>
-                                </tr>
-                            @endif
-                        @else
-                            <tr>
-                                <th></th>
-                                <td>Không tìm thấy kết quả</td>
-                            </tr>
-                        @endif
                     </tbody>
                 </table>
             </div>
             <div class="row justify-content-md-center ">
-                {{ $teachers->links('pagination::bootstrap-4') }}
+                
             </div>
             
             <!-- /.row -->

@@ -8,6 +8,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentLoginController;
 use App\Http\Controllers\TranscriptController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('postlogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('check.login')->group(function () {
-    Route::get('/', function () {
-        return view('home');
-    })->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::prefix('classes')->middleware('can:is-admin')->group(function () {
         //index
@@ -44,6 +44,21 @@ Route::middleware('check.login')->group(function () {
         Route::post('/update/{id}', [ClassGradeController::class, 'update'])->name('classes.update');
         //delete
         Route::get('/delete/{id}', [ClassGradeController::class, 'delete'])->name('classes.delete');
+    });
+
+    Route::prefix('users')->middleware('can:admin-1')->group(function () {
+        //index
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        // //search
+        // Route::post('/search', [UserController::class, 'search'])->name('users.search');
+        //create
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        // update
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
+        //delete
+        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
     });
 
     Route::prefix('school-year')->middleware('can:is-admin')->group(function () {

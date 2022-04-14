@@ -3,91 +3,31 @@
 @section('title')
 <title>Trang chủ</title>
 @endsection
-
+@section('css')
+<link rel="stylesheet" href="css/home.css">
+@endsection
 @section('content')
 
-<div class="content-wrapper">
+<div class="content-wrapper background-body">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Starter Page</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-
-            <div class="card card-primary card-outline">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
-          </div>
-          <!-- /.col-md-6 -->
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="m-0">Featured</h5>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
-
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h5 class="m-0">Featured</h5>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
-
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-          <!-- /.col-md-6 -->
+      <div class="row justify-content-center">
+        <div class="col-sm-6 text-center">
+          <p class="title">Thông tin cá nhân</p>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
+      <div class="row justify-content-center text-center mt-5 border-info">
+        <div class="col-sm-6 info">
+          <div class="name mt-2"><i class="fa-solid fa-address-card mr-1 icon"></i>Họ tên: <span>{{$userLogin->last_name .' '. $userLogin->first_name}}</span></div>
+          <div class="date  mt-2"><i class="fa-solid fa-cake-candles mr-1 icon"></i>Ngày sinh: <span>{{Carbon\Carbon::parse($userLogin->date_of_birth)->format('d/m/Y')}}</span></div>
+          @if(isset($userLogin->id_class))<div class="class  mt-2"><i class="fa-solid fa-landmark mr-1 icon"></i>Lớp chủ nhiệm: <span>{{$userLogin->class->class_grade}}</span></div>@endif
+          <div class="address  mt-2"><i class="fa-solid fa-address-book mr-1 icon"></i>Địa chỉ: <span>{{$userLogin->address}}</span></div>
+          <div class="gender  mt-2"><i class="fa-solid fa-mars-and-venus mr-1 icon"></i></i>Giới tính: <span>{{$userLogin->gender}}</span></div>
+          <div class="phone  mt-2"><i class="fa-solid fa-phone icon"></i>Điện thoại: <span>{{$userLogin->phone_number}}</span></div>
+          <div class="email  mt-2"><i class="fa-solid fa-at icon"></i>Email: <span>{{$userLogin->email}}</span></div>
+        </div>
+      </div>
     </div>
-    <!-- /.content -->
+<!-- /.content -->
 </div>
 @endsection

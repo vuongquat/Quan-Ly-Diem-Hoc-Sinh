@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\teacher;
+namespace App\Http\Requests\user;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TeacherEditRequest extends FormRequest
+class UserAddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,14 @@ class TeacherEditRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(){
+    public function rules()
+    {
         return [
              'first_name' => 'required|max:10',
              'last_name' => 'required|max:20|min:2',
              'phone_number' => 'required|max:15|min:9',
              'address' => 'required',
-             'id_class' => 'required',
-             'email' => 'required|email|unique:users,email|unique:teachers,email,'.$this->id,
+             'email' => 'required|email|unique:teachers,email|unique:users,email',
              'date_of_birth'=>'required'
 
         ];
@@ -49,7 +49,6 @@ class TeacherEditRequest extends FormRequest
         'email.email' => 'Không đúng định dạng email!',
         'email.unique' => 'Email này đã tồn tại. Vui lòng nhập email khác',
         'date_of_birth.required' => 'Bạn chưa nhập ngày sinh!',
-        'id_class.required' => 'Bạn chưa chọn lớp!',
     ];
 }
 }

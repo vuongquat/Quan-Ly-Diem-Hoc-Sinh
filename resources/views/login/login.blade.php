@@ -20,6 +20,18 @@
   <div class="login-logo">
     <h1 class="title">Hệ thống đăng nhập</h1>
   </div>
+  @if(session('message'))
+    <div class="row justify-content-center">
+        <div class="col-sm-12">
+            <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                {{session('message')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+        </div>
+        </div>
+    </div>
+    @endif
   <!-- /.login-logo -->
   <div class="card p-5">
     <div class="card-body login-card-body">
@@ -29,7 +41,7 @@
             <label class="user">Tài khoản:</label>
             <div class="input-group form-group mb-3">
               <input type="text" class="form-control @error('user') is-invalid @enderror"
-               name="user" placeholder="User" value="{{old('user')}}">
+               name="user" placeholder="Tài khoản" value="{{old('user')}}">
               <div class="input-group-append">
                   <div class="input-group-text">
                   <span class="fa-solid fa-user"></span>
@@ -44,7 +56,7 @@
             <label class="password">Mật khẩu:</label>
             <div class="input-group mb-3">
                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                 name="password" placeholder="Password" value="{{old('password')}}">
+                 name="password" placeholder="Mật khẩu" value="{{old('password')}}">
                 <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-lock"></span>

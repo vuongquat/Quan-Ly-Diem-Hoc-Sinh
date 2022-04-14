@@ -63,7 +63,7 @@ class AuthController extends Controller
             return redirect()->route('student.login-home',['student_code' => $studentCode]);
         }
         else{
-            return redirect()->route('login');
+            return redirect()->route('login')->with('message','Tài khoản hoặc mật khẩu không chính xác vui lòng kiểm tra lại!');
         }
     }
 
